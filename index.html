@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arabic Readability Scorer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <div class="badge">Arabic NLP · Al-Heeti Fog Index</div>
+    <h1>مقياس وضوح النص العربي</h1>
+    <p>Arabic Readability Scorer</p>
+  </header>
+
+  <div class="card">
+    <div class="card-label">النص العربي</div>
+    <textarea
+      id="textInput"
+      placeholder="أدخل النص العربي هنا للتحليل وتقييم مستوى قابلية القراءة..."
+      oninput="updateCount()"
+    ></textarea>
+    <div class="char-count" id="charCount">0 حرف · 0 كلمة</div>
+
+    <button class="btn" id="evalBtn" onclick="evaluateText()">
+      <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+      </svg>
+      تقييم قابلية القراءة
+    </button>
+  </div>
+
+  <div id="results">
+    <!-- Main score card -->
+    <div class="score-card">
+      <div class="score-label">Fog Index · مؤشر الضباب</div>
+      <div class="score-value" id="scoreValue">—</div>
+      <div><span class="score-level" id="scoreLevel">—</span></div>
+      <p class="score-desc" id="scoreDesc">—</p>
+      <div class="gauge-wrap">
+        <div class="gauge-bar">
+          <div class="gauge-fill" id="gaugeFill" style="width: 0%"></div>
+        </div>
+        <div class="gauge-labels">
+          <span>0</span><span>5</span><span>10</span><span>15</span><span>20+</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-grid">
+      <div class="stat-box">
+        <div class="stat-value" id="statSentences">—</div>
+        <div class="stat-name">الجمل · Sentences</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-value" id="statWords">—</div>
+        <div class="stat-name">الكلمات · Words</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-value" id="statComplex">—</div>
+        <div class="stat-name">كلمات معقدة · Complex</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-value" id="statASL">—</div>
+        <div class="stat-name">متوسط طول الجملة · ASL</div>
+      </div>
+    </div>
+
+    <div class="formula-note">
+      <span>Fog Index</span> = 0.4 × (ASL + PCW) &nbsp;·&nbsp;
+      Complex words ≥ 5 letters &nbsp;·&nbsp;
+      Standard: <span>Al-Heeti</span>
+    </div>
+  </div>
+
+  <footer>
+    <p>Developed by <strong>Mario Ashraf</strong></p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
